@@ -30,7 +30,7 @@
 
 ## Phase 3: API - Admin Product Management
 
-- [ ] **Create Admin Product Endpoints:**
+- [X] **Create Admin Product Endpoints:**
   - Map admin-only endpoints, securing them with `.RequireAuthorization("Admin")`.
   - `POST /api/products` endpoint for creating a new product.
   - `PUT /api/products/{id}` endpoint for updating an existing product.

@@ -21,8 +21,51 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
   </head>
-  <body>
+  <body style="background-image: url('images/background-pattern.jpg'); background-repeat: no-repeat; background-size: cover; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
 
+    <!-- Login Form Section -->
+    <section class="login-section py-5 w-100" id="login-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4">
+              <div class="card-body">
+                <div class="text-center mb-4">
+                  <img src="images/logo.png" alt="logo" class="img-fluid mb-3" style="max-width: 150px;">
+                  <h3 class="card-title fw-bold">Login</h3>
+                  <p class="text-muted">Welcome back! Please login to your account.</p>
+                </div>
+                <form id="login-form">
+                  <div class="mb-3">
+                    <label for="email" class="form-label fw-semibold">Email address</label>
+                    <input type="email" class="form-control rounded-3 border-light-subtle" id="email" placeholder="enter your email">
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="form-label fw-semibold">Password</label>
+                    <input type="password" class="form-control rounded-3 border-light-subtle" id="password" placeholder="enter your password">
+                  </div>
+                  <div class="mb-3 d-flex justify-content-between align-items-center">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="remember">
+                      <label class="form-check-label text-muted" for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="text-primary text-decoration-none small">Forgot password?</a>
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-3">Login</button>
+                  </div>
+                </form>
+                <div class="text-center mt-4">
+                  <p class="mb-0 text-muted">Don't have an account? <a href="register.html" class="text-primary fw-bold text-decoration-none">Register</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="content" hidden>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
       <defs>
         <symbol xmlns="http://www.w3.org/2000/svg" id="link" viewBox="0 0 24 24">
@@ -2505,6 +2548,8 @@
         </div>
       </div>
     </div>
+    </div>
+    <script src="./js/scripts/login.js"></script>
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

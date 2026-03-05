@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Restaurant_Application.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Restaurant_Application.Data;
 
 
 namespace Restaurant_Application.Routes
