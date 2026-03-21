@@ -177,7 +177,6 @@ async function getCart() {
         if(!text){
           return null;
         }
-        console.log(text);
         return JSON.parse(text);
     } catch (error) {
         console.error('Failed to fetch cart:', error);

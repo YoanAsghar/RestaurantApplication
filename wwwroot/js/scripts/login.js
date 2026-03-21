@@ -1,6 +1,7 @@
 const LOGIN_FORM = document.getElementById("login-form");
 const EMAIL = document.getElementById("email");
 const PASSWORD = document.getElementById("password");
+const ADMIN_DASHBOARD_BUTTON = document.getElementById("admin-link");
 
 
 async function verifyAuthentication(){
@@ -15,6 +16,11 @@ async function verifyAuthentication(){
   if(!response.ok){
     localStorage.removeItem("jwt_token");
     return
+  }
+
+  const data = await response.json();
+  if(data.role != "Admin"){
+    ADMIN_DASHBOARD_BUTTON.setAttribute("hidden", "true");
   }
 
   document.getElementById("login-section").setAttribute("hidden", "true");

@@ -30,6 +30,7 @@ async function verifyToken() {
         if (data.role === "Admin" && adminLink) {
             adminLink.style.display = 'block';
         }
+    console.log(data.role);
 
     } catch (error) {
         localStorage.removeItem("jwt_token");
