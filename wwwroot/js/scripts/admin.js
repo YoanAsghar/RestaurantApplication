@@ -5,7 +5,7 @@ const PRODUCTS_TABLE = document.getElementById("products-table");
 
 async function getAllProductsFromDB(){
   try{
-    const response = await fetch("http://localhost:5183/api/products?PageSize=20&Page=1")
+    const response = await fetch("/api/products?PageSize=20&Page=1")
     if(!response.ok) throw new Error("Error getting products");
     const responseData = await response.json();
     return responseData.data;
@@ -86,7 +86,7 @@ function AddDeleteFunctionToTheButtons(){
       const productId = e.currentTarget.getAttribute('data-product-id');
 
       try {
-        const response = await fetch(`http://localhost:5183/api/products/${productId}`, {
+        const response = await fetch(`/api/products/${productId}`, {
           method: "DELETE",
           headers: { 'Authorization': `Bearer ${localStorage.getItem("jwt_token")}` }
         });
@@ -127,8 +127,8 @@ async function setupProductForm() {
 
         const method = editingProductId ? "PUT" : "POST";
         const url = editingProductId 
-            ? `http://localhost:5183/api/products/${editingProductId}`
-            : "http://localhost:5183/api/products";
+            ? `/api/products/${editingProductId}`
+            : "/api/products";
 
         try {
             const response = await fetch(url, {
@@ -167,7 +167,7 @@ async function setupProductForm() {
 
 async function getAllOrdersFromDB(){
   try{
-    const response = await fetch("http://localhost:5183/api/orders?PageSize=20&Page=1", {
+    const response = await fetch("/api/orders?PageSize=20&Page=1", {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("jwt_token")}`
       }
@@ -218,7 +218,7 @@ async function renderOrders() {
 
 async function getAllCustomersFromDB(){
   try{
-    const response = await fetch("http://localhost:5183/api/users", {
+    const response = await fetch("/api/users", {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("jwt_token")}`
       }

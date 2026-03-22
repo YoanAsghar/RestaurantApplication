@@ -14,7 +14,7 @@ async function AddFunctionToSuscriptionForm() {
   SUSCRIPTION_FORM.addEventListener("submit", async (e) => {
     e.preventDefault();
     try{
-    const response = await fetch("http://localhost:5183/api/users/subscribe", {
+    const response = await fetch("/api/users/subscribe", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ async function AddFunctionToSuscriptionForm() {
 
 async function GetProducts(){
   try{
-    const response = await fetch("http://localhost:5183/api/products", {
+    const response = await fetch("/api/products", {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("jwt_token")}`
       }
@@ -142,7 +142,7 @@ function setupProductEventListeners(products) {
             const quantity = parseInt(quantityInput.value, 10);
 
             try {
-                const response = await fetch('http://localhost:5183/api/cart', {
+                const response = await fetch('/api/cart', {
                     method: "POST",
                     headers: {
                         'Content-Type': "application/json",
@@ -171,7 +171,7 @@ function setupProductEventListeners(products) {
 
 async function getCart() {
     try {
-        const response = await fetch('http://localhost:5183/api/cart', {
+        const response = await fetch('/api/cart', {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("jwt_token")}`
             }
@@ -195,7 +195,7 @@ async function getCart() {
 
 async function removeCartItem(cartItemId) {
     try {
-        const response = await fetch(`http://localhost:5183/api/cart/${cartItemId}`, {
+        const response = await fetch(`/api/cart/${cartItemId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem("jwt_token")}`
@@ -290,7 +290,7 @@ async function renderCartItems() {
 
 async function handleCheckout() {
     try {
-        const response = await fetch('http://localhost:5183/api/orders/checkout', {
+        const response = await fetch('/api/orders/checkout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

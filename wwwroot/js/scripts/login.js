@@ -8,7 +8,7 @@ async function verifyAuthentication(){
   const token = localStorage.getItem("jwt_token");
   if(!token){ return }
 
-  const response = await fetch("http://localhost:5183/api/auth/verify", {
+  const response = await fetch("/api/auth/verify", {
     headers: {"Authorization": `Bearer ${token}`}
   })
 
@@ -41,7 +41,7 @@ LOGIN_FORM.addEventListener("submit", async (event) => {
   const UserData = getDataFromLoginForm();
   try{
 
-    const response = await fetch("http://localhost:5183/api/auth/login", {
+    const response = await fetch("/api/auth/login", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

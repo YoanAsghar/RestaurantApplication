@@ -16,7 +16,7 @@ REGISTER_FORM.addEventListener("submit", async (event) => {
   const userInformation = getRegisterFormData();
 
   try{
-    const response = await fetch("http://localhost:5183/api/auth/register",  {
+    const response = await fetch("/api/auth/register",  {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -27,7 +27,7 @@ REGISTER_FORM.addEventListener("submit", async (event) => {
     if(response.ok){
       const data = await response.json();
       localStorage.setItem("jwt_token", data.token)
-      location.href = "http://localhost:5183/"
+      location.href = "/"
       return;
     }
     else{

@@ -13,7 +13,7 @@ async function verifyToken() {
     }
 
     try {
-        const response = await fetch("http://localhost:5183/api/auth/verify", {
+        const response = await fetch("/api/auth/verify", {
             headers: { "Authorization": `Bearer ${token}` }
         });
 
