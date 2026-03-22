@@ -108,6 +108,12 @@ OrderRoutes.MapOrderRoutes(app);
 CartRoutes.MapCartRoutes(app);
 UserRoutes.MapUserRoutes(app, builder.Configuration);
 
+// Correr migraciones automáticamente al iniciar
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
 app.Urls.Add($"http://0.0.0.0:{port}");
