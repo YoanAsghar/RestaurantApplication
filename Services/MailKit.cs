@@ -25,12 +25,15 @@ namespace Restaurant_Application.Services
 
             Message.Body = BodyBuilder.ToMessageBody();
 
+            Console.WriteLine(emailSettings["Email"] + emailSettings["Password"]);
+
             using var SmtpClient = new SmtpClient();
             SmtpClient.CheckCertificateRevocation = false;
             await SmtpClient.ConnectAsync(Server, Port, SecureSocketOptions.StartTls);
             await SmtpClient.AuthenticateAsync(emailSettings["Email"], emailSettings["Password"]);
             await SmtpClient.SendAsync(Message);
             await SmtpClient.DisconnectAsync(true);
+
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Restaurant_Application.Routes
                 }
                 catch (Exception ex)
                 {
-                    return Results.Conflict(ex);
+                    return Results.Conflict(ex.Message);
                 }
             });
         }

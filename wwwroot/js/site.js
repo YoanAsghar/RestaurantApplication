@@ -25,7 +25,6 @@ async function AddFunctionToSuscriptionForm() {
         Email: document.getElementById("email").value
       })
     })
-      console.log(response);
 
     }catch(err){
       console.log(err);
