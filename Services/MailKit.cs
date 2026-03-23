@@ -9,30 +9,38 @@ namespace Restaurant_Application.Services
     {
         public static async Task SendSubscriptionEmail(string toEmail, string username, IConfiguration config)
         {
-            var emailSettings = config.GetSection("EmailSettings");
-            string Server = "smtp.gmail.com";
-            int Port = 587;
-            var Message = new MimeMessage();
-
-            Message.From.Add(new MailboxAddress("FoodMart", "yoanxl31@gmail.com"));
-            Message.To.Add(new MailboxAddress(username, toEmail));
-            Message.Subject = "Thank you for subscribing";
-
-            var BodyBuilder = new BodyBuilder
+            try
             {
-                HtmlBody = "Thank you for subscribing :)",
-            };
+                var emailSettings = config.GetSection("EmailSettings");
+                string Server = "smtp.gmail.com";
+                int Port = 587;
+                var Message = new MimeMessage();
 
-            Message.Body = BodyBuilder.ToMessageBody();
+                Message.From.Add(new MailboxAddress("FoodMart", "yoanxl31@gmail.com"));
+                Message.To.Add(new MailboxAddress("New User", toEmail));
+                Message.Subject = "Thank you for subscribing";
 
-            Console.WriteLine(emailSettings["Email"] + emailSettings["Password"]);
+                var BodyBuilder = new BodyBuilder
+                {
+                    HtmlBody = "Thank you for subscribing :)",
+                };
 
-            using var SmtpClient = new SmtpClient();
-            SmtpClient.CheckCertificateRevocation = false;
-            await SmtpClient.ConnectAsync(Server, Port, SecureSocketOptions.StartTls);
-            await SmtpClient.AuthenticateAsync(emailSettings["Email"], emailSettings["Password"]);
-            await SmtpClient.SendAsync(Message);
-            await SmtpClient.DisconnectAsync(true);
+                Message.Body = BodyBuilder.ToMessageBody();
+
+                Console.WriteLine(emailSettings["Email"] + emailSettings["Password"]);
+
+                using var SmtpClient = new SmtpClient();
+                SmtpClient.CheckCertificateRevocation = false;
+                await SmtpClient.ConnectAsync(Server, Port, SecureSocketOptions.StartTls);
+                await SmtpClient.AuthenticateAsync(emailSettings["Email"], emailSettings["Password"]);
+                await SmtpClient.SendAsync(Message);
+                await SmtpClient.DisconnectAsync(true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                throw;
+            }
 
         }
     }

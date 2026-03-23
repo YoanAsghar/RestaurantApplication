@@ -21,10 +21,12 @@ async function AddFunctionToSuscriptionForm() {
         'Authorization': `Bearer ${localStorage.getItem("jwt_token")}`
       },
       body: JSON.stringify({
-        Username: document.getElementById("name").value,
-        Email: document.getElementById("email").value
+        Username: document.getElementById("sub-name").value,
+        Email: document.getElementById("sub-email").value
       })
     })
+
+      console.log(document.getElementById("sub-name").value + document.getElementById("sub-email").value)
 
     }catch(err){
       console.log(err);
