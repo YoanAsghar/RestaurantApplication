@@ -20,6 +20,8 @@ async function verifyAuthentication(){
 
   const data = await response.json();
 
+  console.log(data);
+
   if(data.role != "Admin"){
     ADMIN_DASHBOARD_BUTTON.setAttribute("hidden", "")
   }
@@ -53,7 +55,7 @@ LOGIN_FORM.addEventListener("submit", async (event) => {
       localStorage.setItem("jwt_token", data.token)
       document.getElementById("content").removeAttribute("hidden")
       document.getElementById("login-section").setAttribute("hidden", "true");
-
+      verifyAuthentication();
       return
     }
   }catch(err){
