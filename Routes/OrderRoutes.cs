@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Restaurant_Application.Services;
 using Restaurant_Application.Models;
 using Microsoft.EntityFrameworkCore;
 using Restaurant_Application.Data;
@@ -8,7 +9,7 @@ namespace Restaurant_Application.Routes
 {
     public static class OrderRoutes
     {
-        public static void MapOrderRoutes(this IEndpointRouteBuilder app)
+        public static void MapOrderRoutes(this IEndpointRouteBuilder app, IConfiguration config)
         {
             var OrderRoutes = app.MapGroup("/api/orders").WithTags("Orders");
 
@@ -86,19 +87,6 @@ namespace Restaurant_Application.Routes
 
             }).RequireAuthorization();
 
-            //Create a new order 
-            OrderRoutes.MapPost("/", async (ApplicationDbContext db, ClaimsPrincipal user, List<Product> products) =>
-            {
-                try
-                {
-                    return Results.Ok();
-                }
-                catch (Exception ex)
-                {
-                    return Results.Conflict(ex);
-                }
-            }).RequireAuthorization();
-
             //Delete order
             OrderRoutes.MapDelete("/{id}", (ApplicationDbContext db, ClaimsPrincipal user) =>
             {
@@ -111,12 +99,19 @@ namespace Restaurant_Application.Routes
                 }
             }).RequireAuthorization("AdminOnly");
 
-            OrderRoutes.MapPost("/checkout", async (ApplicationDbContext db, ClaimsPrincipal user) =>
+            //Create a new order
+            OrderRoutes.MapPost("/", async (ApplicationDbContext db, ClaimsPrincipal user, IConfiguration config) =>
             {
                 var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (string.IsNullOrEmpty(userId))
                 {
                     return Results.Unauthorized();
+                }
+
+                var userObject = await db.Users.FindAsync(userId);
+                if (userObject == null)
+                {
+                    return Results.NotFound("User not found.");
                 }
 
                 // 1. Find the user's cart with all its items and the related product details.
@@ -163,6 +158,8 @@ namespace Restaurant_Application.Routes
                 // 6. Save all changes in a single transaction.
                 await db.SaveChangesAsync();
 
+                //Send email to the user
+                await Services.MailKit.SendOrderCompletedEmail(userObject, config);
                 return Results.Ok(order);
 
             }).RequireAuthorization();

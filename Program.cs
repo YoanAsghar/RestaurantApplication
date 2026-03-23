@@ -104,7 +104,7 @@ app.UseAuthorization();
 //Endpoints
 ProductRoutes.MapProductRoutes(app);
 AuthRoutes.MapAuthRoutes(app);
-OrderRoutes.MapOrderRoutes(app);
+OrderRoutes.MapOrderRoutes(app, builder.Configuration);
 CartRoutes.MapCartRoutes(app);
 UserRoutes.MapUserRoutes(app, builder.Configuration);
 

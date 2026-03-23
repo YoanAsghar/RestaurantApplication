@@ -40,7 +40,7 @@ namespace Restaurant_Application.Routes
 
                     if (Cart == null)
                     {
-                        return Results.Ok(new { message = "Cart is empty" });
+                        return Results.NoContent();
                     }
 
                     return Results.Ok(Cart);

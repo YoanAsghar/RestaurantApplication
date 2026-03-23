@@ -1,3 +1,9 @@
+const logout_button = document.getElementById("user-logout");
+logout_button.addEventListener("click", () => {
+  localStorage.removeItem("jwt_token");
+  document.location.href = "../index.html";
+})
+
 // Global variables
 let isFirstPurchase = false;
 let currentPage = 1;
@@ -161,7 +167,6 @@ function setupProductEventListeners(products) {
                 }
 
                 const result = await response.json();
-                console.log('Item added to cart:', result);
                 await renderCartItems(); // Re-render cart after adding an item
             } catch (error) {
                 console.error('Failed to add item to cart:', error);
@@ -289,33 +294,6 @@ async function renderCartItems() {
     }
 }
 
-async function handleCheckout() {
-    try {
-        const response = await fetch('/api/orders/checkout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem("jwt_token")}`
-            }
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Checkout failed.');
-        }
-
-        const newOrder = await response.json();
-        console.log('Order placed successfully:', newOrder);
-        alert('Order placed successfully!');
-
-        // Re-render cart, which should now be empty
-        await renderCartItems();
-
-    } catch (error) {
-        console.error('Checkout error:', error);
-        alert(`Error during checkout: ${error.message}`);
-    }
-}
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -332,10 +310,5 @@ document.addEventListener("DOMContentLoaded", () => {
               removeCartItem(cartItemId);
           }
       });
-  }
-
-  const checkoutButton = document.getElementById('checkout-btn');
-  if(checkoutButton) {
-      checkoutButton.addEventListener('click', handleCheckout);
   }
 })

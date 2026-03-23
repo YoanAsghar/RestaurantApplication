@@ -20,8 +20,6 @@ async function verifyAuthentication(){
 
   const data = await response.json();
 
-  console.log(data);
-
   if(data.role != "Admin"){
     ADMIN_DASHBOARD_BUTTON.setAttribute("hidden", "")
   }
