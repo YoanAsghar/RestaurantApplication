@@ -1,3 +1,5 @@
+https://restaurantapplication-production-8d6b.up.railway.app/index.html
+
 # FoodMart - Restaurant Application
 
 FoodMart is a comprehensive web application for managing a restaurant or food mart, featuring a robust .NET-based backend and an interactive web-based frontend.
